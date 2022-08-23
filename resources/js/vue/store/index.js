@@ -10,15 +10,32 @@ const store = createStore({
       data: sessionStorage.getItem('user'),
       token: sessionStorage.getItem('_TOKEN')
     },
+    todos: [],
     products: [],
   },
 
   getters: {
+    getTodos: (state) => state.todos,
     getProducts: (state) => state.products,
     getAuthUser: (state) => state.user.data,
   },
 
   actions: {
+    fetchTodos({ commit }, todos) {
+      axiosClient.get('/todos')
+        .then(res => res.data.data)
+        .then(res => { return commit('SET_TODOS', res); })
+    },
+
+    newTodoItem({ commit }, todo) {
+      axiosClient.post('/todos', todo).then(res => res.data.data)
+        .then(e => console.log(e))
+    },
+
+    removeTodoItem({ commit }, todo) {
+      axiosClient.delete('/todos/'.todo.id).then(e => console.log('ok'))
+    },
+
     fetchProducts({ commit }, products) {
       axios.get('/api/products').then(
         res => res.data.data
@@ -62,6 +79,10 @@ const store = createStore({
 
   mutations: {
 
+    SET_TODOS: (state, todos) => {
+      state.todos = todos
+    },
+
     SET_PRODUCTS: (state, products) => {
       state.products = products;
     },
@@ -79,7 +100,6 @@ const store = createStore({
   },
 
   modules: {
-
   }
 
 })

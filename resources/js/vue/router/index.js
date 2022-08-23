@@ -19,6 +19,11 @@ const routes = [
         component: () => import('@/pages/Products.vue')
       },
       {
+        path: '/todo',
+        name: 'Todo List',
+        component: () => import('@/pages/Todo.vue')
+      },
+      {
         path: '/logout',
         name: 'Logout',
         redirect: '/guest'

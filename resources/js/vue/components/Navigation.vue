@@ -195,6 +195,7 @@ const user = {
 const navigation = [
     { name: "Home", current: true },
     { name: "Products", current: false },
+    { name: "Todo List", current: false },
 ];
 const userNavigation = [
     { name: "Your Profile", url: "", action: false },
